@@ -77,7 +77,7 @@ class MyView(ListView):
 
 class CategoriesCountView(ListView):
     model = CategoriesModel
-    template_name = "devApp/category.html"
+    template_name = "devapp/category.html"
     context_object_name = 'Categories'
     def head(self, *args, **kwargs):
         #last_book = self.get_queryset().latest('publication_date')
@@ -86,7 +86,7 @@ class CategoriesCountView(ListView):
         return response
 
 class HomePageView(TemplateView):
-    template_name = "devApp/category.html"
+    template_name = "devapp/category.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -95,20 +95,20 @@ class HomePageView(TemplateView):
 #***************************************************
 
 class AboutView(TemplateView):
-    template_name = "devApp/about.html"
+    template_name = "devapp/about.html"
 
 
 #@login_required(login_url="/login/")
 class createView(CreateView):
     model=CodesModel
     form_class=createForm
-    template_name = 'devApp/createPage.html'
+    template_name = 'devapp/createPage.html'
 
    
 class PersonView(CreateView):
     model=CodesModel
     form_class=PersonForm
-    template_name = 'devApp/PersonPage.html'
+    template_name = 'devapp/PersonPage.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -124,7 +124,7 @@ class PersonView(CreateView):
 class generateView(CreateView):
     model=GenerateModel
     form_class=generateForm
-    template_name = 'devApp/generatePage.html'
+    template_name = 'devapp/generatePage.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
