@@ -82,7 +82,7 @@ LOGOUT_REDIRECT_URL = "home"  # Route defined in home/urls.py
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(CORE_DIR, "templates")],
+        'DIRS': [os.path.join(CORE_DIR, "apps/templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
