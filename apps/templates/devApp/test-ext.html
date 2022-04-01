@@ -1,0 +1,88 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block head %}
+    <!-- autocomplete CSS -->
+    <link href="{% static 'admin/css/vendor/select2/select2.css' %}" rel="stylesheet">
+    <link href="{% static 'admin/css/autocomplete.css' %}" rel="stylesheet">
+    <link href="{% static 'autocomplete_light/select2.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <!-- Modal -->
+    <div id="createCategoryElement" class="modal" tabindex="-1" role="dialog" aria-labelledby="createCategoryElement" aria-hidden="true">
+    </div><!-- modal -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>{{ category.name_de }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-1 col-3 align-self-center">
+                {% if game_type == 1 %}
+                    <a data-toggle="modal" data-target="#createCategoryElement" class="btn btn-primary btn-lg" href="{% url 'gamefiles:image-create' category_id=category.id %}"><i class="fa fa-plus"></i></a>
+                {% elif game_type == 2 %}
+                    <a data-toggle="modal" data-target="#createCategoryElement" class="btn btn-primary btn-lg" href="{% url 'gamefiles:sound-create' category_id=category.id %}"><i class="fa fa-plus"></i></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'admin/js/vendor/select2/select2.full.js' %}"></script>
+    <script src="{% static 'autocomplete_light/autocomplete_light.js' %}"></script>
+    <script src="{% static 'autocomplete_light/select2.js' %}"></script>
+    <script>
+    function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+    console.log(csrftoken);
+
+    //Ajax call
+    function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        crossDomain: false, // obviates need for sameOrigin test
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type)) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+    $('#createCategoryElement').on('show.bs.modal', function (event) {
+        var modal = $(this)
+        var segments = $(location).attr('href').split( '/' );
+        var url_base = segments[0]+"//"+segments[2]+"/"+segments[3]+"/";
+        let game_type;
+        if (segments[4] === '1') {
+            game_type = 'image-';
+        } else if (segments[4] === '2') {
+            game_type = 'sound-';
+        }
+        var category_id = segments[5];
+        $.ajax({
+            url: url_base+game_type+"create/"+category_id,
+            context: document.body
+        }).done(function(response) {
+            modal.html(response);
+        });
+    })
+  </script>
+{% endblock %}

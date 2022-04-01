@@ -1,0 +1,10 @@
+
+{% load ot_tags %}
+
+
+{{ hello|safe }}
+
+
+{% current_time "%Y-%m-%d %I:%M %p" as the_time %}
+<p>The time is {{ the_time }}.</p>
+

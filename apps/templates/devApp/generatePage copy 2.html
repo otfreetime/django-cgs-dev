@@ -1,0 +1,57 @@
+{% extends 'devapp/base.html' %}
+{# Don't forget that one ! #}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <table style="display: none">
+            {{ view.formset.empty_form }}
+        </table>
+
+        <table>
+            {{ view.formset }}
+        </table>
+
+        <input type="submit" />
+    </form>
+</div>
+<div id="mySelect2"></div>
+{% endblock %}
+
+{% block footer %}
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+{{ form.media }}
+
+<script>
+    (function ($) {
+        $('#add-form').click(function () {
+           
+            var index = $('#id_inline_test_models-TOTAL_FORMS').val()
+            var newTable = $('#id_inline_test_models-__prefix__-DELETE').parents('table').clone()
+            newTable.find(':input').each(function () {
+                for (attr of ['code', 'id'])
+                    $(this).attr(
+                        attr,
+                        $(this).attr(attr).replace('__prefix__', index)
+                    )
+            })
+            newTable.insertBefore($(this))
+            $('#id_inline_test_models-TOTAL_FORMS').val(
+                parseInt($('#id_inline_test_models-TOTAL_FORMS').val()) + 1
+            )
+            newTable.slideDown()
+
+        })
+
+        {{ js_script|safe }}
+
+    })($)
+</script>
+
+
+{% endblock %}

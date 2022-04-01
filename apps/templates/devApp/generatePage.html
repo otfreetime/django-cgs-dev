@@ -1,0 +1,49 @@
+{% extends 'devapp/base.html' %}
+{# Don't forget that one ! #}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block content %}
+<main>
+    {% include 'includes/preloader.html' %}
+   
+    <!-- Hero -->
+    <section class="section section-header pb-11 bg-primary text-white">
+        <div class="container">
+            <form method="post">
+                {% csrf_token %}
+            
+                {% for hidden in form.hidden_fields %}
+                  {{ hidden }}
+                {% endfor %}
+            
+                {% for field in form.visible_fields %}
+                  <div class="form-group">
+                      <div class="text-left" ><label for="{{ field.id_for_label }}">{{ field.label }}</label></div>
+                    
+                    {{ field|add_class:'form-control'  }}
+                    {% for error in field.errors %}
+                      <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                {% endfor %}
+            
+                <div class="form-group">
+                  <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> Save
+                  </button>
+                  <a href="{% url 'home' %}" class="btn btn-default">Cancel</a>
+                </div>
+              </form> 
+        </div>
+    </section>
+</main>
+
+{% endblock content %}
+
+{% block javascripts %}
+    {{ form.media }}
+{% endblock javascripts %}
+
+

@@ -1,0 +1,11 @@
+{% block content %}
+    <h2>Categories</h2>
+    <ul>
+        {% for Category in new_context %}
+            <li>{{ Category.categoryname }}</li>
+        {% endfor %}
+       
+    </ul>
+
+
+{% endblock %}
