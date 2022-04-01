@@ -82,7 +82,7 @@ TEMPLATE_DIR = os.path.join(CORE_DIR, "apps/templates")  # ROOT dir for template
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(CORE_DIR, "apps/templates")],
+        'DIRS': [os.path.join(CORE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
