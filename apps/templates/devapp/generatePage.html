@@ -1,13 +1,24 @@
-{% extends 'devapp/base.html' %}
+{% extends 'layouts/base-fullscreen.html' %}
+
 {# Don't forget that one ! #}
 {% load static %}
 {% load crispy_forms_tags %}
 {% load widget_tweaks %}
+{% block stylesheets %}
+<style>
+    .select2-container .select2-selection--single {
+        height: 45px !important;
+    }
+    .select2-selection__arrow {
+        height: 40px !important;
+    }
+</style>
 
+{% endblock stylesheets %}
 {% block content %}
 <main>
     {% include 'includes/preloader.html' %}
-   
+ 
     <!-- Hero -->
     <section class="section section-header pb-11 bg-primary text-white">
         <div class="container">
@@ -38,12 +49,32 @@
               </form> 
         </div>
     </section>
+    
+<p>Test</p>
 </main>
 
 {% endblock content %}
 
 {% block javascripts %}
+
     {{ form.media }}
+<script>
+// on first focus (bubbles up to document), open the menu
+$(document).on('focus', '.select2-selection.select2-selection--single', function (e) {
+  $(this).closest(".select2-container").siblings('select:enabled').select2('open');
+});
+
+// steal focus during close - only capture once and stop propogation
+$('select.select2').on('select2:closing', function (e) {
+  $(e.target).data("select2").$selection.one('focus focusin', function (e) {
+    e.stopPropagation();
+  });
+});
+
+
+</script>
+
+ 
 {% endblock javascripts %}
 
 
