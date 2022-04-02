@@ -6,12 +6,16 @@
 {% load widget_tweaks %}
 {% block stylesheets %}
 <style>
-    .select2-container .select2-selection--single {
-        height: 45px !important;
-    }
-    .select2-selection__arrow {
-        height: 40px !important;
-    }
+  .select2-container .select2-selection--single {
+    height: 40px !important;
+    margin: 0;
+    padding: 7px 0 0 0;
+    font-size:20px;
+  }
+  label {
+    margin: 0;
+    padding: 7px 0 0 0;
+  }
 </style>
 
 {% endblock stylesheets %}
@@ -40,12 +44,12 @@
                   </div>
                 {% endfor %}
             
-                <div class="form-group">
+                {% comment %} <div class="form-group">
                   <button type="submit" class="btn btn-success">
                     <span class="glyphicon glyphicon-ok"></span> Save
                   </button>
                   <a href="{% url 'home' %}" class="btn btn-default">Cancel</a>
-                </div>
+                </div> {% endcomment %}
               </form> 
         </div>
     </section>
@@ -56,20 +60,12 @@
 {% endblock content %}
 
 {% block javascripts %}
-
     {{ form.media }}
 <script>
-// on first focus (bubbles up to document), open the menu
-$(document).on('focus', '.select2-selection.select2-selection--single', function (e) {
-  $(this).closest(".select2-container").siblings('select:enabled').select2('open');
-});
+ 
 
-// steal focus during close - only capture once and stop propogation
-$('select.select2').on('select2:closing', function (e) {
-  $(e.target).data("select2").$selection.one('focus focusin', function (e) {
-    e.stopPropagation();
-  });
-});
+ 
+
 
 
 </script>
