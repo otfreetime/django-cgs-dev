@@ -43,6 +43,7 @@ STATICFILES_DIRS = (
 # Application definition
 
 INSTALLED_APPS = [
+    'jquery',
     'apps.home',  # Enable the inner home (home)
     'apps.devapp',
     'apps.mytags',
@@ -52,6 +53,8 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     'rest_framework',
+    'bootstrap5',
+    'bootstrap_datepicker_plus',
 
     #***************************************
     'django.contrib.admin',

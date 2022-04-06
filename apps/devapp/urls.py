@@ -15,6 +15,7 @@ router.register(r'codes', views.CodesViewSet)
 
 #app_name = 'devapp'
 urlpatterns = [
+       path('create', views.CreateView.as_view(), name='create'),
        path('', include(router.urls)),
        path('api/', CodesListApiView.as_view()),
        path('api/<cat>/', CodesListApiView.as_view()),

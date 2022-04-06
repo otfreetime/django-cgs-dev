@@ -26,6 +26,8 @@ from rest_framework import permissions
 from .models import CodesModel
 from .serializers import CodesSerializer
 
+from bootstrap_datepicker_plus.widgets import DateTimePickerInput
+
 #*************************************************************************************
 
 class CodesViewSet(viewsets.ModelViewSet):
@@ -110,6 +112,8 @@ class PersonView(CreateView):
     form_class=PersonForm
     template_name = 'devapp/PersonPage.html'
 
+
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['js_script'] = """
@@ -125,6 +129,8 @@ class generateView(CreateView):
     model=GenerateModel
     form_class=generateForm
     template_name = 'devapp/generatePage.html'
+
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

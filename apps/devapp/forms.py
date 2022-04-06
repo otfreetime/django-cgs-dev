@@ -5,7 +5,7 @@ from dal import autocomplete
 from django.utils.html import format_html
 from django.shortcuts import resolve_url, reverse
 from django.urls import reverse_lazy
-
+from bootstrap_datepicker_plus.widgets import DatePickerInput #, TimePickerInput, DateTimePickerInput, MonthPickerInput, YearPickerInput
 # class CodesAutocomplete(autocomplete.Select2QuerySetView):
 #     def get_result_label(self, result):
 #         return format_html('<img src="flags/{}.png"> {}', result.name, result.name)
@@ -41,12 +41,20 @@ class createForm(forms.ModelForm):
         }
         requireds ={ "remarks":False}
 
-class generateForm(forms.ModelForm):
 
+
+class generateForm(forms.ModelForm):
+    # datepart = forms.DateField(widget=DateInput())
+
+    # def get_form(self):
+    #     form = super().get_form()
+    #     form.fields['pub_date'].widget = DatePickerInput()
+    #     return form
     class Meta:
         model = GenerateModel
         fields = "__all__"
         widgets = {
+            'datepart': DatePickerInput(),
             'thetype': autocomplete.ModelSelect2(url='code-json-url-autocomplete-Entity', attrs={'data-html': True}),
             'relatedIssues1': autocomplete.ModelSelect2(url='code-json-url-autocomplete-Doctype', attrs={'data-html': True}),
             'relatedIssues2': autocomplete.ModelSelect2(url='code-json-url-autocomplete-Government', attrs={'data-html': True}),
