@@ -65,14 +65,40 @@
               </form> 
         </div>
     </section>
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 671524103435f5a185107aea2b6ced49b1c29823
 </main>
 
 {% endblock content %}
 
 {% block javascripts %}
+<<<<<<< HEAD
 
 {{ form.media }}
 
+=======
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> 
+</script>
+    {{ form.media }}
+    <script>
+      $(document).ready(function(){
+        $("#id_datepart").keydown(function(e){
+            if (e.which == 9 ) { //keycode for TAB
+                e.preventDefault(); //stops the default behavior of moving focus to the back page
+                $(this).focus(); //moves focus to your first input button
+            }
+        });
+        
+       $('#id_datepart').focus(function(){
+        $(this).attr("size", 10);
+       });
+      });
+      </script>
+
+ 
+>>>>>>> 671524103435f5a185107aea2b6ced49b1c29823
 {% endblock javascripts %}
 
 

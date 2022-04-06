@@ -54,8 +54,13 @@ class generateForm(forms.ModelForm):
         model = GenerateModel
         fields = "__all__"
         widgets = {
+<<<<<<< HEAD
             'datepart': DatePickerInput(),
             'thetype': autocomplete.ModelSelect2(url='code-json-url-autocomplete-Entity', attrs={'data-html': True}),
+=======
+            'datepart':  forms.TextInput(attrs={'class': 'form-control','placeholder': 'Select the Date.','data-datepicker':'', 'autocomplete':"off"}),
+            'thetype': autocomplete.ModelSelect2(url='code-json-url-autocomplete-Entity', attrs={'data-html': True,'class': 'form-control','placeholder': 'Select the Type'}),
+>>>>>>> 671524103435f5a185107aea2b6ced49b1c29823
             'relatedIssues1': autocomplete.ModelSelect2(url='code-json-url-autocomplete-Doctype', attrs={'data-html': True}),
             'relatedIssues2': autocomplete.ModelSelect2(url='code-json-url-autocomplete-Government', attrs={'data-html': True}),
             'relatedIssues3': autocomplete.ModelSelect2(url='code-json-url-autocomplete-Corporate', attrs={'data-html': True}),
